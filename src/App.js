@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import {createStore} from 'redux';
+import { Provider, useDispatch } from 'react-redux'
 
+import TableContainer from './table/TableContainer';
+import EditForm from './editForm/EditForm';
+import mainReducer from './reducers/mainReducer';
 function App() {
+  
+  let store = createStore(
+    mainReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Provider store={store}>
+        <Router>
+          <Route path="/test" component={TableContainer}/>
+          <Route path="/edit/:id" component={EditForm}/>
+        </Router>
+      </Provider>
     </div>
   );
 }
