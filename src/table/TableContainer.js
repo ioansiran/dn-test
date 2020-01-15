@@ -17,11 +17,20 @@ class TableContainer extends Component {
     handleChange() {
         if (this.props.selectedAll) {
             this.props.deselectAll();
-        } else if (this.props.deselectedAll) {
-            this.props.selectAll();
-        } else if (this.props.someSelected) {
-            this.props.deselectAll();
+            return;
         }
+        if (this.props.selectedSome) {
+            this.props.deselectAll();
+            return;
+        }
+        if (!this.props.selectedSome) {
+            this.props.selectAll();
+        }
+
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.forceUpdate();
     }
 
     render() {
@@ -30,10 +39,11 @@ class TableContainer extends Component {
             <div>
                 <TopBarComponent/>
                 <div className="row">
-                    <Checkbox
+                    <input
+                        type={"checkbox"}
                         onChange={this.handleChange}
-                        checked={this.props.selectedAll && !this.props.someSelected}
-                        intermediate={this.props.someSelected}
+                        checked={this.props.selectedAll}
+                        className={this.props.selectedSome && !this.props.selectedAll ? 'intermediate' : ''}
                     />
                     <div>ID</div>
                     <div>name</div>
@@ -42,12 +52,14 @@ class TableContainer extends Component {
                     <div>created_date</div>
                     <div>modified_date</div>
                 </div>
-                {this.props.currentShownList ? this.props.currentShownList.map((item, index) => {
+                {this.props.currentShownList && !this.props.hidden ? this.props.currentShownList.map((item, index) => {
                     return (
                         <ListItem
                             key={index}
                             index={index}
-                            payload={item}/>)
+                            payload={item}
+                            selected={item.checked}
+                        />)
                 }) : 'Deez nuts'}
             </div>
         )
@@ -76,8 +88,9 @@ const mapStateToProps = state => {
         selectedItems: state.selectedItemIndexes,
         totalDataLenght: state.totalItemCount,
         selectedAll: state.selectedAll,
-        deselectedAll: state.deselectedAll,
-        someSelected: state.someChecked
+        selectedSome: state.selectedSome,
+        selectedItemCount: state.selectedItemCount,
+        hidden: state.hidden
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);

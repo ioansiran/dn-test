@@ -21,9 +21,9 @@ class TopBarComponent extends Component {
         return (
             <div className="topBar">
                 <SearchField/>
-                <p>{!this.props.listItemCount ? '0' : this.props.listItemCount} items selected</p>
+                <p>{!this.props.count ? '0' : this.props.count} items selected</p>
                 <RowCountSelector/>
-                {(!this.props.isRowsRemoved) && <button onClick={this.handleRemoveClick}>Remove rows</button>}
+                {(!this.props.hidden) && <button onClick={this.handleRemoveClick}>Remove rows</button>}
             </div>
         )
     }
@@ -31,7 +31,9 @@ class TopBarComponent extends Component {
 
 const mapStateToProps = (state) => ({
     listItemCount: state.selectedItemIndexes?.length,
-    isRowsRemoved: state.currentShownList.length === 0
+    isRowsRemoved: state.currentShownList.length === 0,
+    count: state.selectedItemsCount,
+    hidden: state.hidden
 });
 const mapDispatchToProps = (dispatch) => ({
     removeRows: () => {

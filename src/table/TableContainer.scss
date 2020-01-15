@@ -1,0 +1,9 @@
+.intermediate {
+  background-color: red;
+  content: '\2713' !important;
+
+  &::after {
+    width: 12px;
+    content: "➖";
+  }
+}

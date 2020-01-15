@@ -1,17 +1,24 @@
 .row {
-    display: grid;
-    grid-template-columns: 2% 2% 15% 15% 30% 15% 15%;
-    padding: 0 15px;
-        -webkit-touch-callout: none; /* iOS Safari */
-          -webkit-user-select: none; /* Safari */
-           -khtml-user-select: none; /* Konqueror HTML */
-             -moz-user-select: none; /* Old versions of Firefox */
-              -ms-user-select: none; /* Internet Explorer/Edge */
-                  user-select: none; /* Non-prefixed version, currently
-                                        supported by Chrome, Opera and Firefox */
-    &-checked {
-        @extend .row;
-        background-color: green;
-    }
+  display: grid;
+  border: 1px solid black;
+  grid-template-columns: 2% 2% 15% 15% 30% 15% 15% 1px;
+  padding: 5px 15px;
+  margin: 0 5px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                         supported by Chrome, Opera and Firefox */
+  &-checked {
+    @extend .row;
+    background-color: green;
+  }
 
+}
+
+.highlighted {
+  color: red;
 }

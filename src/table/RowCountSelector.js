@@ -19,7 +19,7 @@ class RowCountSelector extends Component {
 
     getButtons() {
         return this.state.options.map((item, index) => {
-            let selected = item === this.state.selectedNumberOfRows;
+            let selected = item === this.state.selectedNumberOfRows && !this.props.hidden;
             return (
                 <button
                     key={String(index)}
@@ -40,7 +40,9 @@ class RowCountSelector extends Component {
     }
 }
 
-// const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    hidden: state.hidden
+});
 
 const mapDispatchToProps = (dispatch) => ({
     setNumberOfRows: (number) => {
@@ -48,4 +50,4 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(null, mapDispatchToProps)(RowCountSelector)
+export default connect(mapStateToProps, mapDispatchToProps)(RowCountSelector)

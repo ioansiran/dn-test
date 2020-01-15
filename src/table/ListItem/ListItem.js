@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './ListItem.scss'
 import {connect} from 'react-redux'
 import {deselectItem, selectItem} from '../../actions/mainActions'
+import {Link} from "react-router-dom";
 
 class ListItem extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class ListItem extends Component {
             checked: props.payload.checked
         };
         this.handleToggle = this.handleToggle.bind(this);
+        this.getHighlightedText = this.getHighlightedText.bind(this)
     }
 
     handleToggle() {
@@ -23,18 +25,39 @@ class ListItem extends Component {
 
     }
 
+
+    doSomethingElse(e) {
+        e.stopPropagation();
+        // ... do stuff
+    }
+
+    getHighlightedText(text, higlight = '') {
+        text = text.toString();
+        // Split on higlight term and include term into parts, ignore case
+        if (higlight != '') {
+            let parts = text.split(new RegExp(`(${higlight})`, 'gi'));
+            return <span> {parts.map((part, i) =>
+                <span key={i} className={part.toLowerCase() === higlight.toLowerCase() ? 'highlighted' : {}}>
+            {part}
+        </span>)
+            } </span>;
+        } else
+            return text;
+    }
+
     render() {
         return (
-            <div onClick={this.handleToggle} className={"row" + (this.props.payload.checked ? '-checked' : '')}>
+            <div onClick={this.handleToggle} className={"row" + (this.props.selected ? '-checked' : '')}>
                 <input
                     type="checkbox"
-                    checked={this.props.payload.checked}/>
-                <div>{this.props.payload.id}</div>
-                <div>{this.props.payload.name}</div>
-                <div>{this.props.payload.owner}</div>
-                <div>{this.props.payload.type}</div>
-                <div>{this.props.payload.created_date}</div>
-                <div>{this.props.payload.modified_date}</div>
+                    checked={this.props.selected}/>
+                <div>{this.getHighlightedText(this.props.payload.id, this.props.queryString)}</div>
+                <div>{this.getHighlightedText(this.props.payload.name, this.props.queryString)}</div>
+                <div>{this.getHighlightedText(this.props.payload.owner, this.props.queryString)}</div>
+                <div>{this.getHighlightedText(this.props.payload.type, this.props.queryString)}</div>
+                <div>{this.getHighlightedText(this.props.payload.created_date, this.props.queryString)}</div>
+                <div>{this.getHighlightedText(this.props.payload.modified_date, this.props.queryString)}</div>
+                <div><Link to={'/edit/' + this.props.index} onClick={this.doSomethingElse}>✒</Link></div>
             </div>
         )
     }
@@ -49,8 +72,8 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 const mapStateToProps = state => ({
-    allDeselected: state.deselectedAll,
-    allSelected: state.selectedAll
+    allSelected: state.selectedAll,
+    queryString: state.searchQuery
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
