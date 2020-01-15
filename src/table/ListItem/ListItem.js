@@ -6,7 +6,7 @@ class ListItem extends Component {
     constructor(props){
         super(props)
         this.state = {
-            checked:props.selected
+            checked:props.selected.includes(props.index)
         }
         this.handleToggle = this.handleToggle.bind(this);
     }
@@ -17,17 +17,15 @@ class ListItem extends Component {
             } else {
                 this.props.deselectItem(this.props.index)
             }
-        })        
+        })
 
     }
     render() {
         return (
             <div onClick={this.handleToggle} className={"row"+(this.state.checked?'-checked':'')}>
                 <input
-                        type="checkbox"
-                        checked={this.state.checked}
-                />
-                
+                    type="checkbox"
+                    checked={this.state.checked}/>
                 <div>{this.props.payload.id}</div>
                 <div>{this.props.payload.name}</div>
                 <div>{this.props.payload.owner}</div>

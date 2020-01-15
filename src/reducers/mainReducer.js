@@ -4,7 +4,8 @@ const initialState = {
     currentShownList:[], // contains the list that's currently displayed
     selectedItemIndexes:[], // array of indexes of selected items from the main data source (improved performance for not searching)
     searchQuery: '', // search query string
-    searching : false // flag for showing search results 
+    searching : false,
+    totalItemCount: data.length // flag for showing search results 
 };
 
 export default function mainReducer(state = initialState, action){
@@ -35,6 +36,16 @@ export default function mainReducer(state = initialState, action){
             return {
                 ...state,
                 selectedItemIndexes: state.selectedItemIndexes.filter(item => item !== action.data)
+            }
+        case "DESELECT_ALL":
+            return {
+                ...state,
+                selectedItemIndexes: []
+            }
+        case "SELECT_ALL":
+            return {
+                ...state,
+                selectedItemIndexes: data.map((item,index)=> index)
             }
         case "DELETE_ITEMS":
             return {

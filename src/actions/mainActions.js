@@ -29,6 +29,16 @@ export function deselectItem (id) {
         data: id
     }
 }
+export function deselectAll () {
+    return {
+        type: "DESELECT_ALL"
+    }
+}
+export function selectAll () {
+    return {
+        type: "SELECT_ALL"
+    }
+}
 export function deleteItems() {
     return {
         type: "DELETE_ITEMS"

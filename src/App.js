@@ -4,7 +4,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 import {createStore} from 'redux';
 import { Provider, useDispatch } from 'react-redux'
@@ -22,7 +23,8 @@ function App() {
     <div>
       <Provider store={store}>
         <Router>
-          <Route path="/test" component={TableContainer}/>
+          <Redirect from="/" to="/table"/>
+          <Route path="/table" component={TableContainer}/>
           <Route path="/edit/:id" component={EditForm}/>
         </Router>
       </Provider>
