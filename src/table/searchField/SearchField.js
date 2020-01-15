@@ -1,18 +1,19 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { searchList, clearSearch } from '../../actions/mainActions';
+import React, {Component} from 'react'
+import {connect} from 'react-redux';
+import {clearSearch, searchList} from '../../actions/mainActions';
 
 class SearchField extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
-        this.state= {
-            value:''
-        }
+        this.state = {
+            value: ''
+        };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
+
     handleClick() {
-        this.setState({value:''});
+        this.setState({value: ''});
         this.props.clearSearch();
     }
     handleChange(event) {
@@ -28,27 +29,27 @@ class SearchField extends Component {
     render() {
         return (
             <div>
-                <input 
-                    value={this.state.value} 
+                <input
+                    value={this.state.value}
                     onChange={this.handleChange}/>
-                <button 
+                <button
                     onClick={this.handleClick}
-                >X</button>
+                >X
+                </button>
             </div>
         )
     }
 }
-const mapStateToProps = (state) => ({
-    
-})
+
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = dispatch => ({
     triggerSearch: (queryString) => {
         dispatch(searchList(queryString))
     },
-    clearSearch : () => {
+    clearSearch: () => {
         dispatch(clearSearch())
     }
-})
+});
 
 export default connect(null, mapDispatchToProps)(SearchField);

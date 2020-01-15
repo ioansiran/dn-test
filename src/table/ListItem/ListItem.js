@@ -1,31 +1,34 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import './ListItem.scss'
-import { connect } from 'react-redux'
-import { selectItem, deselectItem } from '../../actions/mainActions'
+import {connect} from 'react-redux'
+import {deselectItem, selectItem} from '../../actions/mainActions'
+
 class ListItem extends Component {
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
         this.state = {
-            checked:props.selected.includes(props.index)
-        }
+            checked: props.payload.checked
+        };
         this.handleToggle = this.handleToggle.bind(this);
     }
-    handleToggle(event){
-        this.setState({checked:!this.state.checked}, _ => {
-            if(this.state.checked){
-                this.props.selectItem(this.props.index)
-            } else {
-                this.props.deselectItem(this.props.index)
-            }
-        })
+
+    handleToggle() {
+        if (this.state.checked) {
+            this.setState({checked: false});
+            this.props.deselectItem(this.props.index)
+        } else {
+            this.setState({checked: true});
+            this.props.selectItem(this.props.index)
+        }
 
     }
+
     render() {
         return (
-            <div onClick={this.handleToggle} className={"row"+(this.state.checked?'-checked':'')}>
+            <div onClick={this.handleToggle} className={"row" + (this.props.payload.checked ? '-checked' : '')}>
                 <input
                     type="checkbox"
-                    checked={this.state.checked}/>
+                    checked={this.props.payload.checked}/>
                 <div>{this.props.payload.id}</div>
                 <div>{this.props.payload.name}</div>
                 <div>{this.props.payload.owner}</div>
@@ -38,12 +41,16 @@ class ListItem extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  selectItem:(index)=> { 
-      dispatch(selectItem(index)) 
-    }, 
-    deselectItem:(index)=> {
+    selectItem: (index) => {
+        dispatch(selectItem(index))
+    },
+    deselectItem: (index) => {
         dispatch(deselectItem(index))
     }
-})
+});
+const mapStateToProps = state => ({
+    allDeselected: state.deselectedAll,
+    allSelected: state.selectedAll
+});
 
-export default connect(null, mapDispatchToProps)(ListItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);

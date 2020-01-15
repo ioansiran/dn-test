@@ -1,32 +1,36 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import './RowCountSelector.scss'
-import { connect } from 'react-redux';
-import { getList } from "../actions/mainActions";
+import {connect} from 'react-redux';
+import {getList} from "../actions/mainActions";
+
 class RowCountSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedNumberOfRows:20,
-            options: [20,100,250,500,1000]
+            selectedNumberOfRows: 20,
+            options: [20, 100, 250, 500, 1000]
         }
     }
-    selectOption (selectedNumberOfRows) {
-        this.setState({selectedNumberOfRows:selectedNumberOfRows});
+
+    selectOption(selectedNumberOfRows) {
+        this.setState({selectedNumberOfRows: selectedNumberOfRows});
         this.props.setNumberOfRows(selectedNumberOfRows)
     }
 
-    getButtons(){
-    return this.state.options.map((item,index) => { 
-        let selected = item === this.state.selectedNumberOfRows;
-        return (
-            <button 
-                className={`button${selected? "-selected" : ''}`}
-                onClick={() => this.selectOption(item)}
-            >
-                {`Load${selected?"ed":''} ${item} rows`}
-            </button>)
-    })
+    getButtons() {
+        return this.state.options.map((item, index) => {
+            let selected = item === this.state.selectedNumberOfRows;
+            return (
+                <button
+                    key={String(index)}
+                    className={`button${selected ? "-selected" : ''}`}
+                    onClick={() => this.selectOption(item)}
+                >
+                    {`Load${selected ? "ed" : ''} ${item} rows`}
+                </button>)
+        })
     }
+
     render() {
         return (
             <div>
@@ -35,14 +39,13 @@ class RowCountSelector extends Component {
         )
     }
 }
-const mapStateToProps = (state) => ({
-    
-})
+
+// const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
     setNumberOfRows: (number) => {
-        dispatch(getList(0,number))
+        dispatch(getList(0, number))
     }
-})
+});
 
 export default connect(null, mapDispatchToProps)(RowCountSelector)
