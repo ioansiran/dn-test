@@ -45,11 +45,12 @@ class TableContainer extends Component {
                         />
                     </div>
                     <div>ID</div>
-                    <div>name</div>
-                    <div>owner</div>
-                    <div>type</div>
-                    <div>created_date</div>
-                    <div>modified_date</div>
+                    <div>Name</div>
+                    <div>Owner</div>
+                    <div>Type</div>
+                    <div>Created on</div>
+                    <div>Last modified</div>
+                    <div>Edit</div>
                 </div>
                 {this.props.currentShownList && !this.props.hidden ? this.props.currentShownList.map((item, index) => {
                     return (
@@ -59,7 +60,7 @@ class TableContainer extends Component {
                             payload={item}
                             selected={item.checked}
                         />)
-                }) : 'Deez nuts'}
+                }) : <p>No items found</p>}
             </div>
         )
     }

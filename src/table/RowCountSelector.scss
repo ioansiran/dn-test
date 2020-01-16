@@ -13,7 +13,7 @@ $buttonWidthPercentage:20%;
 
     &-selected {
         @extend .button;
-        background-color: $focusedButtonColor;
+        background-color: $primaryColorDark;
     }
 
     &:hover {

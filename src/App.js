@@ -18,7 +18,7 @@ function App() {
         <div>
             <Provider store={store}>
                 <Router>
-                    <Redirect from="/" to="/edit/1"/>
+                    <Redirect from="/" to="/table"/>
                     <Switch>
                         <Route path="/table" component={TableContainer}/>
                         <Route path="/edit/:id" component={EditForm}/>

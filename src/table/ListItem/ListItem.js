@@ -17,10 +17,10 @@ class ListItem extends Component {
     handleToggle() {
         if (this.state.checked) {
             this.setState({checked: false});
-            this.props.deselectItem(this.props.index)
+            this.props.deselectItem(this.props.payload.id)
         } else {
             this.setState({checked: true});
-            this.props.selectItem(this.props.index)
+            this.props.selectItem(this.props.payload.id)
         }
 
     }

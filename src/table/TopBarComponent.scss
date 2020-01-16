@@ -5,8 +5,13 @@
     display: grid;
     grid-template-columns: 2fr 1fr 5fr 1fr;
     align-items: center;
-
+    position: sticky;
+    top: 0;
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    margin-bottom: 20px;
 }
+
 
 .removeButton {
     padding: 10px 0;

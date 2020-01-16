@@ -11,7 +11,7 @@
   .editBox {
     font-family: $primaryFont;
     flex-basis: fit-content;
-    background-color: white;
+    background-color: #F9F9F9;
     height: fit-content;
     width: fit-content;
     padding: 20px;
@@ -27,7 +27,33 @@
     .editBody {
       .editRow {
         padding: 10px 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        & > div {
+          padding: 0 10px;
+          display: grid;
+          grid-auto-rows: auto;
+        }
       }
+
     }
+  }
+}
+
+.spinner {
+  width: 28px;
+  margin: 0 auto;
+}
+
+.buttonRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 12px;
+
+  button {
+
+    font-size: 14px;
+    padding: 5px;
   }
 }
