@@ -34,7 +34,8 @@ class TableContainer extends Component {
                 <TopBarComponent/>
                 <div className="row">
                     <div className={'zoomedCheckbox'}>
-                        <input
+
+                    <input
                             type={"checkbox"}
                             onChange={this.handleChange}
                             checked={this.props.selectedAll}

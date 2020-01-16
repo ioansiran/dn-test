@@ -16,7 +16,7 @@ const initialState = {
 
 export default function mainReducer(state = initialState, action) {
 
-    let dataToDisplay, searchResults;
+    let searchResults;
     switch (action.type) {
         case "GET_LIST":
             let checkedStateUnseen = Helper.checkSelectedOrUnselectedAll(state.data, action.data.upperLimit, 999);
