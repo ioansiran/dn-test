@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import './EditForm.scss';
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import {updateItem} from "../actions/mainActions";
-import {useHistory} from "react-router-dom";
-import * as spinnerImage from './spinner.gif'
 
 class EditForm extends Component {
     constructor(state) {
@@ -17,6 +14,7 @@ class EditForm extends Component {
         };
 
         this.validateAndSave = this.validateAndSave.bind(this);
+        this.save = this.save.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -48,16 +46,18 @@ class EditForm extends Component {
     }
 
     validateAndSave() {
+        // TODO add validation logic
+        this.save()
+    }
 
+    save() {
         this.setState({payload: {...this.state.payload, modified_date: new Date().toISOString()}}, () => {
             this.props.updateItem(this.state.payload);
             this.setState({showSavingSpinner: true});
             setTimeout(_ => {
                 this.props.history.push("/table");
-
             }, 500)
         });
-
     }
 
     render() {
@@ -82,18 +82,30 @@ class EditForm extends Component {
                                 </div>
                                 <div>
                                     <label htmlFor={'name'}>Name</label>
-                                    <input disabled={this.state.readOnly === true} type={'text'} name={'name'}
+                                    <input disabled={this.state.readOnly === true}
+                                           type={'text'}
+                                           name={'name'}
                                            onChange={this.handleChange}
-                                           value={this.state.payload.name}/>
+                                           value={this.state.payload.name}
+                                           required={true}
+                                           minLength={1}
+                                           maxLength={32}
+                                    />
                                 </div>
                             </div>
 
                             <div className={'editRow'}>
                                 <div>
                                     <label htmlFor={'owner'}>Owner</label>
-                                    <input disabled={this.state.readOnly === true} type={'text'} name={'owner'}
+                                    <input disabled={this.state.readOnly === true}
+                                           type={'text'}
+                                           name={'owner'}
                                            onChange={this.handleChange}
-                                           value={this.state.payload.owner}/>
+                                           value={this.state.payload.owner}
+                                           required={true}
+                                           minLength={1}
+                                           maxLength={64}
+                                    />
                                 </div>
                                 <div>
                                     <label htmlFor={'type'}>Type</label>

@@ -94,12 +94,11 @@ export default function mainReducer(state = initialState, action) {
                     i.checked = true;
                     return i;
                 }),
-                selectedItemsCount: Helper.checkSelectedOrUnselectedAll(state.data, 0, 1000).selectedItemsCount
             };
-            state.data = [...state.data, state.data.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit).map(item => {
-                item.checked = true;
-                return item;
-            })];
+            state.currentShownList.forEach((item) => {
+                state.data[item.id - 1].checked = true;
+            });
+            state.selectedItemsCount = Helper.checkSelectedOrUnselectedAll(state.data, 0, 1000).selectedItemsCount;
             return state;
         case "DELETE_ITEMS":
             return {

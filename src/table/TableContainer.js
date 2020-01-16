@@ -4,7 +4,6 @@ import {deselectAll, getList, searchList, selectAll} from '../actions/mainAction
 import ListItem from './ListItem/ListItem';
 import './TableContainer.scss';
 import TopBarComponent from './TopBarComponent';
-import Checkbox from 'react-three-state-checkbox'
 
 class TableContainer extends Component {
     constructor(props) {
@@ -28,7 +27,6 @@ class TableContainer extends Component {
 
     }
 
-    // TODO - De facut lag de validate
     render() {
         console.log(this.list);
         return (
