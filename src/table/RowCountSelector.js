@@ -7,9 +7,10 @@ class RowCountSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedNumberOfRows: 20,
+            selectedNumberOfRows: props.limits.upperLimit,
             options: [20, 100, 250, 500, 1000]
-        }
+        };
+        props.setNumberOfRows(props.limits.upperLimit)
     }
 
     selectOption(selectedNumberOfRows) {
@@ -41,7 +42,8 @@ class RowCountSelector extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    hidden: state.hidden
+    hidden: state.hidden,
+    limits: state.currentListLimits
 });
 
 const mapDispatchToProps = (dispatch) => ({

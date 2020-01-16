@@ -31,7 +31,7 @@ class ListItem extends Component {
         // ... do stuff
     }
 
-    getHighlightedText(text, higlight = '') {
+    getHighlightedText(text = '', higlight = '') {
         text = text.toString();
         // Split on higlight term and include term into parts, ignore case
         if (higlight != '') {

@@ -9,7 +9,6 @@ import Checkbox from 'react-three-state-checkbox'
 class TableContainer extends Component {
     constructor(props) {
         super(props);
-        this.props.getList(0, 20);
         this.state = {searchFieldValue: '', checked: false, indeterminate: false};
         this.handleChange = this.handleChange.bind(this);
     }
@@ -29,10 +28,7 @@ class TableContainer extends Component {
 
     }
 
-    componentWillReceiveProps(newProps) {
-        this.forceUpdate();
-    }
-
+    // TODO - De facut lag de validate
     render() {
         console.log(this.list);
         return (
@@ -43,6 +39,7 @@ class TableContainer extends Component {
                         type={"checkbox"}
                         onChange={this.handleChange}
                         checked={this.props.selectedAll}
+                        disabled={this.props.hidden}
                         className={this.props.selectedSome && !this.props.selectedAll ? 'intermediate' : ''}
                     />
                     <div>ID</div>

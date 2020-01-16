@@ -4,24 +4,23 @@ import SearchField from "./searchField/SearchField";
 import {connect} from 'react-redux';
 import './TopBarComponent.scss'
 import {deleteItems} from '../actions/mainActions';
+import SelectionCounter from "./selectionCounter/SelectionCounter";
 
 class TopBarComponent extends Component {
 
     constructor(props) {
         super(props);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
-
     }
 
     handleRemoveClick() {
         this.props.removeRows();
     }
-
     render() {
         return (
             <div className="topBar">
                 <SearchField/>
-                <p>{!this.props.count ? '0' : this.props.count} items selected</p>
+                <SelectionCounter/>
                 <RowCountSelector/>
                 {(!this.props.hidden) && <button onClick={this.handleRemoveClick}>Remove rows</button>}
             </div>

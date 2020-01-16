@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import {createStore} from 'redux';
 import {Provider} from 'react-redux'
 
@@ -19,8 +19,10 @@ function App() {
             <Provider store={store}>
                 <Router>
                     <Redirect from="/" to="/table"/>
-                    <Route path="/table" component={TableContainer}/>
-                    <Route path="/edit/:id" component={EditForm}/>
+                    <Switch>
+                        <Route path="/table" component={TableContainer}/>
+                        <Route path="/edit/:id" component={EditForm}/>
+                    </Switch>
                 </Router>
             </Provider>
         </div>

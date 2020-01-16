@@ -6,7 +6,7 @@ class SearchField extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            value: props.searchQuery
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -41,7 +41,9 @@ class SearchField extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    searchQuery: state.searchQuery
+});
 
 const mapDispatchToProps = dispatch => ({
     triggerSearch: (queryString) => {

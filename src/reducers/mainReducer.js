@@ -2,7 +2,7 @@ import data from "../mockDataProvider.js";
 import Helper from "./helper";
 
 const initialState = {
-    currentShownList: [], // contains the list that's currently displayed
+    currentShownList: data.slice(0.20), // contains the list that's currently displayed
     searchQuery: '', // search query string
     searching: false,
     totalItemCount: data.length, // flag for showing search results
@@ -10,24 +10,25 @@ const initialState = {
         lowerLimit: 0,
         upperLimit: 20
     },
-    selectedItemsCount: 0
+    selectedItemsCount: 0,
+    data
 };
 
-export default function mainReducer(state = initialState, action){
-    
+export default function mainReducer(state = initialState, action) {
+
     let dataToDisplay, searchResults;
     switch (action.type) {
         case "GET_LIST":
             if (state.searching) {
-                searchResults = data.filter(item => {
+                searchResults = state.data.filter(item => {
                     return JSON.stringify(item).toLowerCase().includes(state.searchQuery.toLowerCase())
                 });
                 dataToDisplay = searchResults;
             } else {
-                dataToDisplay = data;
+                dataToDisplay = state.data;
             }
-            let checkedStateUnseen = Helper.checkSelectedOrUnselectedAll(data, action.data.upperLimit, 999);
-            let checkedstateSeen = Helper.checkSelectedOrUnselectedAll(data, 0, action.data.upperLimit);
+            let checkedStateUnseen = Helper.checkSelectedOrUnselectedAll(state.data, action.data.upperLimit, 999);
+            let checkedstateSeen = Helper.checkSelectedOrUnselectedAll(state.data, 0, action.data.upperLimit);
             return {
                 ...state,
                 selectedAll: checkedstateSeen.selectedAll,
@@ -37,27 +38,27 @@ export default function mainReducer(state = initialState, action){
                 hidden: false
             };
         case "SELECT_ITEM":
-            data[action.data].checked = true;
+            state.data[action.data].checked = true;
             return {
                 ...state,
-                ...Helper.checkSelectedOrUnselectedAll(data, state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
-                currentShownList: data.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
+                ...Helper.checkSelectedOrUnselectedAll(state.data, state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
+                currentShownList: state.data.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
 
             };
         case "DESELECT_ITEM":
-            data[action.data].checked = false;
+            state.data[action.data].checked = false;
             return {
                 ...state,
-                ...Helper.checkSelectedOrUnselectedAll(data, state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
-                currentShownList: data.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
+                ...Helper.checkSelectedOrUnselectedAll(state.data, state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
+                currentShownList: state.data.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit),
             };
         case "DESELECT_ALL":
-            data.forEach(i => i.checked = false);
+            state.data.forEach(i => i.checked = false);
             return {
                 ...state,
-                ...Helper.checkSelectedOrUnselectedAll(data, 0, 1000),
-                currentShownList: data.slice(0, state.currentListLimits.upperLimit)
-            }
+                ...Helper.checkSelectedOrUnselectedAll(state.data, 0, 1000),
+                currentShownList: state.data.slice(0, state.currentListLimits.upperLimit)
+            };
         case "SELECT_ALL":
             dataToDisplay = state.currentShownList.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit).map(i => {
                 i.checked = true;
@@ -68,7 +69,7 @@ export default function mainReducer(state = initialState, action){
                 selectedAll: true,
                 selectedSome: false,
                 currentShownList: dataToDisplay,
-                selectedItemsCount: Helper.checkSelectedOrUnselectedAll(data, 0, 1000).selectedItemsCount
+                selectedItemsCount: Helper.checkSelectedOrUnselectedAll(state.data, 0, 1000).selectedItemsCount
             };
         case "DELETE_ITEMS":
             return {
@@ -76,8 +77,9 @@ export default function mainReducer(state = initialState, action){
                 currentShownList: [],
                 hidden: true
             };
+
         case "SEARCH_ITEM":
-            searchResults = data.filter(item => {
+            searchResults = state.data.filter(item => {
                 return JSON.stringify(item).toLowerCase().includes(action.data.toLowerCase())
             });
             return {
@@ -94,8 +96,19 @@ export default function mainReducer(state = initialState, action){
                 searching: false,
                 ...Helper.checkSelectedOrUnselectedAll(state.currentShownList, 0, state.currentShownList.length),
                 searchQuery: '',
-                ...Helper.checkSelectedOrUnselectedAll(data, 0, state.currentListLimits.upperLimit),
-                currentShownList: data.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit)
+                ...Helper.checkSelectedOrUnselectedAll(state.data, 0, state.currentListLimits.upperLimit),
+                currentShownList: state.data.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit)
+            };
+        case 'UPDATE_ITEM':
+
+            return {
+                ...state,
+                data: state.data.map((item) => {
+                    if (item.id == action.data.id) {
+                        return action.data;
+                    }
+                    return item;
+                })
             };
         default:
             return state;
