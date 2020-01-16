@@ -52,7 +52,7 @@ class TableContainer extends Component {
                     <div>Last modified</div>
                     <div>Edit</div>
                 </div>
-                {this.props.currentShownList && !this.props.hidden ? this.props.currentShownList.map((item, index) => {
+                {this.props.currentShownList.length > 0 && !this.props.hidden ? this.props.currentShownList.map((item, index) => {
                     return (
                         <ListItem
                             key={index}
@@ -60,7 +60,7 @@ class TableContainer extends Component {
                             payload={item}
                             selected={item.checked}
                         />)
-                }) : <p>No items found</p>}
+                }) : <h1 className={'noItems'}>No items found</h1>}
             </div>
         )
     }
