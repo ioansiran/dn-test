@@ -1,6 +1,28 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## DN Test project
+
+This project was build with React, SCSS and Redux </br>
+
+Some other dependencies include:
+* react-router-dom
+* react-redux
+* node-sass
+
+Extra features besides specifications: 
+* When a user searches for a string and selects all, only the search results are selected
+* Buttons don't shift positions when all rows are removed
+* Theme colors and global variables can be changed from `theme.scss`
+* In the requirement sheet, the on click events on every row were overlapping (selection and edit action) so I've added an edit button for simplicity of the user experience
+* Editing IDs in the array would cause overlapping in all the rest of the actions, so disabling the ID form field was the best solution so that the data wouldn't be corrupted
+* Added "No items found" message when the list is empty
+* Made the design a bit cooler, buttons slimmer etc.
+
+What could be done next:
+* Add lazy loading to higher than 100 items per page
+* Split the main reducer into Search, selection, edit reducers and combine them in App.js
+* Add error boundary to the 2 Routes
+* A search action can easily be added by cloning the filter action and removing the list limits
 
 In the project directory, you can run:
 
@@ -8,14 +30,6 @@ In the project directory, you can run:
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
