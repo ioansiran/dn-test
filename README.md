@@ -2,21 +2,27 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## DN Test project
 
-This project was build with React, SCSS and Redux </br>
+##### This project was build with React, SCSS and Redux </br>
 
 Some other dependencies include:
 * react-router-dom
 * react-redux
 * node-sass
 
-Extra features besides specifications: 
+I've kept the app simple without overmodularizing everything: <br/>
+* One main reducer for all actions since it's acting on the same data source
+* Components contain all the primitive elements that serve the same purpose
+* One main theme `SCSS` file to keep important variables
+
+##### Extra features besides specifications: 
+* Reducer is written in a way that can easily support pagination with minor modifications
 * When a user searches for a string and selects all, only the search results are selected
 * Buttons don't shift positions when all rows are removed
 * Theme colors and global variables can be changed from `theme.scss`
 * In the requirement sheet, the on click events on every row were overlapping (selection and edit action) so I've added an edit button for simplicity of the user experience
 * Editing IDs in the array would cause overlapping in all the rest of the actions, so disabling the ID form field was the best solution so that the data wouldn't be corrupted
 * Added "No items found" message when the list is empty
-* Made the design a bit cooler, buttons slimmer etc.
+* Made the design a bit cooler, buttons slimmer, shadows etc.
 
 What could be done next:
 * Add lazy loading to higher than 100 items per page
