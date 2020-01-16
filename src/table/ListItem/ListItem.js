@@ -48,9 +48,11 @@ class ListItem extends Component {
     render() {
         return (
             <div onClick={this.handleToggle} className={"row" + (this.props.selected ? '-checked' : '')}>
-                <input
-                    type="checkbox"
-                    checked={this.props.selected}/>
+                <div className={'zoomedCheckbox'}>
+                    <input
+                        type="checkbox"
+                        checked={this.props.selected}/>
+                </div>
                 <div>{this.getHighlightedText(this.props.payload.id, this.props.queryString)}</div>
                 <div>{this.getHighlightedText(this.props.payload.name, this.props.queryString)}</div>
                 <div>{this.getHighlightedText(this.props.payload.owner, this.props.queryString)}</div>

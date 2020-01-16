@@ -3,6 +3,7 @@ import './EditForm.scss';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {updateItem} from "../actions/mainActions";
+import {useHistory} from "react-router-dom";
 
 class EditForm extends Component {
     constructor(state) {
@@ -47,6 +48,7 @@ class EditForm extends Component {
     validateAndSave() {
         this.setState({payload: {modified_date: new Date().toISOString()}});
         this.props.updateItem(this.state.payload);
+        this.props.history.push("/table");
     }
 
     render() {
@@ -62,7 +64,7 @@ class EditForm extends Component {
                             <div className={'editRow'}>
                                 <label htmlFor={'id'}>ID</label>
                                 <input
-                                    disabled={this.state.readOnly === true}
+                                    disabled={true}
                                     type={'text'}
                                     name={'id'}
                                     onChange={this.handleChange}

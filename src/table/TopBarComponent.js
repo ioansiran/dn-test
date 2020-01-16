@@ -22,7 +22,8 @@ class TopBarComponent extends Component {
                 <SearchField/>
                 <SelectionCounter/>
                 <RowCountSelector/>
-                {(!this.props.hidden) && <button onClick={this.handleRemoveClick}>Remove rows</button>}
+                {(!this.props.hidden) &&
+                <button className={'removeButton'} onClick={this.handleRemoveClick}>Remove rows</button>}
             </div>
         )
     }

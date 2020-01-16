@@ -1,9 +1,12 @@
 .intermediate {
-  background-color: red;
-  content: '\2713' !important;
 
   &::after {
-    width: 12px;
-    content: "➖";
+    width: 10px;
+    content: "-";
+    position: relative;
+    top: -13px;
+    left: 1px;
+    font-weight: bold;
+    font-size: 30px;
   }
 }

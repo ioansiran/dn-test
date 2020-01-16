@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
+import './SearchField.scss'
 import {clearSearch, searchList} from '../../actions/mainActions';
 
 class SearchField extends Component {
@@ -30,9 +31,13 @@ class SearchField extends Component {
         return (
             <div>
                 <input
+                    className={'searchField'}
                     value={this.state.value}
-                    onChange={this.handleChange}/>
+                    onChange={this.handleChange}
+                    placeholder={'filter results'}
+                />
                 <button
+                    className={'cancelButton'}
                     onClick={this.handleClick}
                 >X
                 </button>

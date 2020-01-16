@@ -1,0 +1,33 @@
+@import "src/theme";
+
+.editFormContainer {
+  background-color: #2f94a0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+
+  .editBox {
+    font-family: $primaryFont;
+    flex-basis: fit-content;
+    background-color: white;
+    height: fit-content;
+    width: fit-content;
+    padding: 20px;
+    margin: 20px;
+
+    .header {
+      font-size: 1.5em;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 20px;
+    }
+
+    .editBody {
+      .editRow {
+        padding: 10px 0;
+      }
+    }
+  }
+}

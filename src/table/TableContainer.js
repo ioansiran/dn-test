@@ -35,13 +35,15 @@ class TableContainer extends Component {
             <div>
                 <TopBarComponent/>
                 <div className="row">
-                    <input
-                        type={"checkbox"}
-                        onChange={this.handleChange}
-                        checked={this.props.selectedAll}
-                        disabled={this.props.hidden}
-                        className={this.props.selectedSome && !this.props.selectedAll ? 'intermediate' : ''}
-                    />
+                    <div className={'zoomedCheckbox'}>
+                        <input
+                            type={"checkbox"}
+                            onChange={this.handleChange}
+                            checked={this.props.selectedAll}
+                            disabled={this.props.hidden}
+                            className={this.props.selectedSome && !this.props.selectedAll ? 'intermediate' : ''}
+                        />
+                    </div>
                     <div>ID</div>
                     <div>name</div>
                     <div>owner</div>

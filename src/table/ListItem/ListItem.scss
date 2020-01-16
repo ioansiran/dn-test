@@ -1,9 +1,11 @@
+@import "src/theme";
 .row {
   display: grid;
-  border: 1px solid black;
-  grid-template-columns: 2% 2% 15% 15% 30% 15% 15% 1px;
-  padding: 5px 15px;
-  margin: 0 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  grid-template-columns: 1fr 1fr 5fr 5fr 6fr 5fr 5fr 1fr;
+  font-family: $primaryFont;
+  font-size: 1.1em;
+  overflow-scrolling: auto;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -12,11 +14,30 @@
   user-select: none;
   /* Non-prefixed version, currently
                                          supported by Chrome, Opera and Firefox */
-  &-checked {
-    @extend .row;
-    background-color: green;
+  &:nth-child(2n) {
+    background-color: $primaryColorLight;
   }
 
+  &:nth-child(2n-1) {
+    background-color: $primaryColorDark;
+  }
+
+  &-checked {
+    @extend .row;
+    background-color: $secondaryColor !important;
+  }
+
+  & > div {
+    border: 1px solid $primaryColor;
+    padding: 15px 15px;
+  }
+}
+
+.zoomedCheckbox {
+  & > input {
+    width: 15px;
+    height: 15px;
+  }
 }
 
 .highlighted {

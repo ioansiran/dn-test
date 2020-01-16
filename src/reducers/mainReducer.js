@@ -19,14 +19,6 @@ export default function mainReducer(state = initialState, action) {
     let dataToDisplay, searchResults;
     switch (action.type) {
         case "GET_LIST":
-            if (state.searching) {
-                searchResults = state.data.filter(item => {
-                    return JSON.stringify(item).toLowerCase().includes(state.searchQuery.toLowerCase())
-                });
-                dataToDisplay = searchResults;
-            } else {
-                dataToDisplay = state.data;
-            }
             let checkedStateUnseen = Helper.checkSelectedOrUnselectedAll(state.data, action.data.upperLimit, 999);
             let checkedstateSeen = Helper.checkSelectedOrUnselectedAll(state.data, 0, action.data.upperLimit);
             return {
@@ -34,8 +26,10 @@ export default function mainReducer(state = initialState, action) {
                 selectedAll: checkedstateSeen.selectedAll,
                 selectedSome: checkedstateSeen.selectedSome || checkedStateUnseen.selectedSome,
                 currentListLimits: action.data,
-                currentShownList: dataToDisplay.slice(action.data.lowerLimit, action.data.upperLimit),
-                hidden: false
+                currentShownList: state.data.slice(action.data.lowerLimit, action.data.upperLimit),
+                hidden: false,
+                searching: false,
+                searchQuery: ''
             };
         case "SELECT_ITEM":
             state.data[action.data].checked = true;
@@ -77,9 +71,9 @@ export default function mainReducer(state = initialState, action) {
                 currentShownList: [],
                 hidden: true
             };
-
+        // TODO - only search in current row constraints
         case "SEARCH_ITEM":
-            searchResults = state.data.filter(item => {
+            searchResults = state.data.slice(0, state.currentListLimits.upperLimit).filter(item => {
                 return JSON.stringify(item).toLowerCase().includes(action.data.toLowerCase())
             });
             return {
@@ -88,7 +82,7 @@ export default function mainReducer(state = initialState, action) {
                 searchQuery: action.data,
                 ...Helper.checkSelectedOrUnselectedAll(searchResults, 0, searchResults.length),
 
-                currentShownList: searchResults.slice(state.currentListLimits.lowerLimit, state.currentListLimits.upperLimit)
+                currentShownList: searchResults
             };
         case "CLEAR_SEARCH":
             return {
