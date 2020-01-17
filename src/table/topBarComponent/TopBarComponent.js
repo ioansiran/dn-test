@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import RowCountSelector from "./RowCountSelector";
-import SearchField from "./searchField/SearchField";
+import RowCountSelector from "../rowCountSelector/RowCountSelector";
+import SearchField from "../searchField/SearchField";
 import {connect} from 'react-redux';
 import './TopBarComponent.scss'
-import {deleteItems} from '../actions/mainActions';
-import SelectionCounter from "./selectionCounter/SelectionCounter";
+import SelectionCounter from "../selectionCounter/SelectionCounter";
+import {deleteItems} from "../../actions/mainActions";
 
 class TopBarComponent extends Component {
 
@@ -16,6 +16,7 @@ class TopBarComponent extends Component {
     handleRemoveClick() {
         this.props.removeRows();
     }
+
     render() {
         return (
             <div className="topBar">

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {deselectAll, getList, searchList, selectAll} from '../actions/mainActions';
 import ListItem from './ListItem/ListItem';
 import './TableContainer.scss';
-import TopBarComponent from './TopBarComponent';
+import TopBarComponent from './topBarComponent/TopBarComponent';
 
 class TableContainer extends Component {
     constructor(props) {

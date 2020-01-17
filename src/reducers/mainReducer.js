@@ -1,4 +1,4 @@
-import data from "../mockDataProvider.js";
+import data from "./mockDataProvider.js";
 import Helper from "./helper";
 
 const initialState = {
@@ -107,7 +107,6 @@ export default function mainReducer(state = initialState, action) {
                 hidden: true
             };
         case "SEARCH_ITEM":
-            //TODO fix the selection system while searching
             searchResults = state.data.slice(0, state.currentListLimits.upperLimit).filter(item => {
                 return JSON.stringify(item).toLowerCase().includes(action.data.toLowerCase())
             });

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './RowCountSelector.scss'
 import {connect} from 'react-redux';
-import {getList} from "../actions/mainActions";
+import {getList} from "../../actions/mainActions";
 
 class RowCountSelector extends Component {
     constructor(props) {
