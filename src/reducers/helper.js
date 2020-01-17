@@ -10,7 +10,7 @@ export default class Helper {
             if (!data[i].checked)
                 selectedAll = false
         }
-        for (let i = upperLimit + 1; i < data.length; i++)
+        for (let i = upperLimit ; i < data.length; i++)
             selectedItemsCount = (data[i].checked === true) ? selectedItemsCount + 1 : selectedItemsCount;
         selectedSome = selectedAll ? false : selectedSome;
         return {selectedAll, selectedSome, selectedItemsCount}

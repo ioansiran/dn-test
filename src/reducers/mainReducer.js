@@ -19,14 +19,14 @@ export default function mainReducer(state = initialState, action) {
     let searchResults;
     switch (action.type) {
         case "GET_LIST":
-            let checkedStateUnseen = Helper.checkSelectedOrUnselectedAll(state.data, action.data.upperLimit, 999);
-            let checkedstateSeen = Helper.checkSelectedOrUnselectedAll(state.data, 0, action.data.upperLimit);
+            let checkedStateUnseen = Helper.checkSelectedOrUnselectedAll(state.data, action.data.upperLimit, 1000);
+            let checkedStateSeen = Helper.checkSelectedOrUnselectedAll(state.data, 0, action.data.upperLimit);
             return {
                 ...state,
-                selectedAll: checkedstateSeen.selectedAll,
-                selectedSome: checkedstateSeen.selectedSome || checkedStateUnseen.selectedSome,
+                selectedAll: checkedStateSeen.selectedAll,
+                selectedSome: checkedStateSeen.selectedSome || checkedStateUnseen.selectedSome,
                 currentListLimits: action.data,
-                selectedItemsCount: checkedstateSeen.selectedItemsCount,
+                selectedItemsCount: checkedStateSeen.selectedItemsCount,
                 currentShownList: state.data.slice(action.data.lowerLimit, action.data.upperLimit),
                 hidden: false,
                 searching: false,
